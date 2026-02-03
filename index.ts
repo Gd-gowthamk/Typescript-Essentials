@@ -52,7 +52,7 @@ class Observer implements IObserver {
     }
   }
 
-  error(error:) {
+  error(error) {
     if (!this.isUnsubscribed) {
       if (this.handlers.error) {
         this.handlers.error(error);

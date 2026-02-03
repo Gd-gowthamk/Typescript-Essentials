@@ -26,7 +26,7 @@ enum Http_Methods {
   HTTP_STATUS_INTERNAL_SERVER_ERROR = 500,
 }
 interface IObservervable{
-    _subscribe: (observer) => () => void;
+    _subscribe: (observer: Observer<T>) => () => void;
 }
 interface IObserver{
      handlers: ObserverMethods;
@@ -82,10 +82,10 @@ class Observer implements IObserver {
 }
 
 class Observable implements IObservervable {
-  constructor(subscribe: { (observer: any): () => void; (observer: any): () => void; }) {
+  constructor(subscribe: { (observer: Observer<T>): () => void; (observer: Observer<T>): () => void; }) {
     this._subscribe = subscribe;
   }
-    _subscribe: (observer: any) => () => void;
+    _subscribe: (observer: Observer<T>) => () => void;
   static from(values) {
     return new Observable((observer) => {
       values.forEach((value) => observer.next(value));

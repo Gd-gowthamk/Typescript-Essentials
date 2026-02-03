@@ -8,7 +8,7 @@ type RequestMock ={
 }
 type ObserverMethods = {
     next: <T>(request: T) => { status: Http_Methods };
-    error?: (error: any) => { status: Http_Methods };
+    error?: (error: unknown) => { status: Http_Methods };
     complete: () => void;
   };
 type UserMock ={

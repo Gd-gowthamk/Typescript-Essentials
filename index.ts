@@ -8,7 +8,7 @@ type RequestMock ={
 }
 type ObserverMethods = {
     next: <T>(request: T) => { status: Http_Methods };
-    error?: (error: HttpErrorResponse) => { status: Http_Methods };
+    error?: (error: Error) => { status: Http_Methods };
     complete: () => void;
   };
 type UserMock ={
@@ -52,7 +52,7 @@ class Observer implements IObserver {
     }
   }
 
-  error(error) {
+  error(error: Error) {
     if (!this.isUnsubscribed) {
       if (this.handlers.error) {
         this.handlers.error(error);
@@ -146,7 +146,7 @@ const handleRequest = (request: T ) => {
   // handling of request
   return {status: Http_Methods.HTTP_STATUS_OK};
 };
-const handleError = (error:HttpErrorResponse) => {
+const handleError = (error:Error) => {
   // handling of error
   return {status: Http_Methods.HTTP_STATUS_INTERNAL_SERVER_ERROR};
 };
